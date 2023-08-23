@@ -26,7 +26,7 @@ def set_image_path():
 
 def download_image_from_html():
     #Hard Coding Url
-   
+    url = ''
 
     try:
         response = requests.get(url)
@@ -34,15 +34,17 @@ def download_image_from_html():
         
         soup = BeautifulSoup(response.content, 'html.parser')
         img_tag = soup.find('meta',property='og:image')
-        if img_tag:
+        if img_tag and url_entry.get() !='':
             #getting meta content's attributes 
             img_url = img_tag.get('content')
             if img_url:
                     os.system("curl " + img_url +">" +url_entry.get())
                     status_label.config(text="completed")
                     os.startfile(url_entry.get())
-            else:
+            elif img_tag == '':
                 status_label.config(text="Image URL not found in the HTML.")
+            elif url_entry.get() =='':
+                status_label.config(text="Path is not set")
         else:
             status_label.config(text="Image tag not found in the HTML.")
     except Exception as e:
