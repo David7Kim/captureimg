@@ -18,11 +18,16 @@ n_date = n_year+'-'+n_month+'-'+n_day
 
 def set_image_path():
     # setImage Path
+    # dirPath = filedialog.askdirectory(parent=app, initialdir="/", title='폴더를 선택해주세요.')
+    # replacedPath = dirPath.replace("/","\\")
+    # url_entry.delete(0 ,'end')
+    # url_entry.insert(0,replacedPath)
     file_name = filedialog.asksaveasfilename(defaultextension=".png", filetypes=[("PNG Image", "*.png"),("JPEG Image", "*.jpg"), ("All Files", "*.*")] ,initialfile=n_date+'_Bplus_menu')
     with open(file_name, 'wb') as file:
         replacedPath = file_name.replace("/","\\")
         url_entry.delete(0 ,'end')
         url_entry.insert(0,replacedPath)
+    
 
 def download_image_from_html():
     #Hard Coding Url
